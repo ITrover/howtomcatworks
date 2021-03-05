@@ -5,6 +5,9 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+/**
+ * 处理连接
+ */
 public class HttpConnector implements Runnable {
 
   boolean stopped;

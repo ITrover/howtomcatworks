@@ -86,6 +86,7 @@ public class HttpProcessor {
    */
   private void parseHeaders(SocketInputStream input)
     throws IOException, ServletException {
+    // 循环读取请求头
     while (true) {
       HttpHeader header = new HttpHeader();;
 
@@ -140,7 +141,7 @@ public class HttpProcessor {
   private void parseRequest(SocketInputStream input, OutputStream output)
     throws IOException, ServletException {
 
-    // Parse the incoming request line
+    // Parse the incoming request line 解析请求行
     input.readRequestLine(requestLine);
     String method =
       new String(requestLine.method, 0, requestLine.methodEnd);
@@ -154,7 +155,7 @@ public class HttpProcessor {
     else if (requestLine.uriEnd < 1) {
       throw new ServletException("Missing HTTP request URI");
     }
-    // Parse any query parameters out of the request URI
+    // Parse any query parameters out of the request URI 获取请求参数
     int question = requestLine.indexOf("?");
     if (question >= 0) {
       request.setQueryString(new String(requestLine.uri, question + 1,

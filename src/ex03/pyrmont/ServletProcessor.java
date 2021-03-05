@@ -47,6 +47,7 @@ public class ServletProcessor {
       HttpRequestFacade requestFacade = new HttpRequestFacade(request);
       HttpResponseFacade responseFacade = new HttpResponseFacade(response);
       servlet.service(requestFacade, responseFacade);
+      // 将所有信息都输出
       ((HttpResponse) response).finishResponse();
     }
     catch (Exception e) {
