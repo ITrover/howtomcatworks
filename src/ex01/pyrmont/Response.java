@@ -31,10 +31,19 @@ public class Response {
     byte[] bytes = new byte[BUFFER_SIZE];
     FileInputStream fis = null;
     try {
+      if (request.getUri() == null || request.getUri().equals("") || request.getUri().equals("/")){
+        request.setUrl("/index.html");
+      }
       File file = new File(HttpServer.WEB_ROOT, request.getUri());
       if (file.exists()) {
         fis = new FileInputStream(file);
         int ch = fis.read(bytes, 0, BUFFER_SIZE);
+        String header = String.format("HTTP/1.1 200 OK\r\n" +
+                "Content-Type: text/html\r\n" +
+                "Content-Length: %d\r\n" +
+                "\r\n", ch);
+        // 先发送响应头
+        output.write(header.getBytes());
         while (ch!=-1) {
           output.write(bytes, 0, ch);
           ch = fis.read(bytes, 0, BUFFER_SIZE);

@@ -19,7 +19,7 @@ public class HttpServer {
   public static final String WEB_ROOT =
     System.getProperty("user.dir") + File.separator  + "webroot";
 
-  // shutdown command
+  // shutdown command 关闭服务器的请求路径
   private static final String SHUTDOWN_COMMAND = "/SHUTDOWN";
 
   // the shutdown command received
@@ -27,6 +27,7 @@ public class HttpServer {
 
   public static void main(String[] args) {
     HttpServer server = new HttpServer();
+    // 启动服务器并监听
     server.await();
   }
 
@@ -34,6 +35,7 @@ public class HttpServer {
     ServerSocket serverSocket = null;
     int port = 8080;
     try {
+      // 创建服务端Socket
       serverSocket =  new ServerSocket(port, 1, InetAddress.getByName("127.0.0.1"));
     }
     catch (IOException e) {
@@ -68,7 +70,6 @@ public class HttpServer {
       }
       catch (Exception e) {
         e.printStackTrace();
-        continue;
       }
     }
   }
