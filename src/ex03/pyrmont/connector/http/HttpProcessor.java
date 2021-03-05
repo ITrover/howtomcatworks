@@ -91,6 +91,7 @@ public class HttpProcessor {
       HttpHeader header = new HttpHeader();;
 
       // Read the next header
+      // 读取下一行请求头
       input.readHeader(header);
       if (header.nameEnd == 0) {
         if (header.valueEnd == 0) {
@@ -155,7 +156,8 @@ public class HttpProcessor {
     else if (requestLine.uriEnd < 1) {
       throw new ServletException("Missing HTTP request URI");
     }
-    // Parse any query parameters out of the request URI 获取请求参数
+    // Parse any query parameters out of the request URI
+    // 获取请求参数
     int question = requestLine.indexOf("?");
     if (question >= 0) {
       request.setQueryString(new String(requestLine.uri, question + 1,
