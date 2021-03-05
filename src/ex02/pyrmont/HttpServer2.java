@@ -7,6 +7,10 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.IOException;
 
+/**
+ * 基本和HttpServer1相同
+ * 只是将request和response进行了封装，使服务器更加安全
+ */
 public class HttpServer2 {
 
   // shutdown command

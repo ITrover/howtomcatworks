@@ -41,6 +41,12 @@ public class Response implements ServletResponse {
          Status-Line = HTTP-Version SP Status-Code SP Reason-Phrase CRLF
       */
       int ch = fis.read(bytes, 0, BUFFER_SIZE);
+      String header = String.format("HTTP/1.1 200 OK\r\n" +
+              "Content-Type: text/html\r\n" +
+              "Content-Length: %d\r\n" +
+              "\r\n", ch);
+      // 先发送响应头
+      output.write(header.getBytes());
       while (ch!=-1) {
         output.write(bytes, 0, ch);
         ch = fis.read(bytes, 0, BUFFER_SIZE);

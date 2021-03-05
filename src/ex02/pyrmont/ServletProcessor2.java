@@ -42,6 +42,8 @@ public class ServletProcessor2 {
     }
 
     Servlet servlet = null;
+    // 封装request和response，使服务器更加安全
+    // 避免外部调用request和response的其他方法如parseUrl
     RequestFacade requestFacade = new RequestFacade(request);
     ResponseFacade responseFacade = new ResponseFacade(response);
     try {
