@@ -1182,7 +1182,7 @@ final class HttpProcessor
 
     /**
      * Start the background thread we will use for request processing.
-     *
+     * 启动后台线程用于处理请求
      * @exception LifecycleException if a fatal startup error occurs
      */
     public void start() throws LifecycleException {

@@ -764,7 +764,7 @@ public final class HttpConnector
 
     /**
      * Recycle the specified Processor so that it can be used again.
-     *
+     * 重复利用指定的processor
      * @param processor The processor to be recycled
      */
     void recycle(HttpProcessor processor) {
@@ -788,21 +788,25 @@ public final class HttpConnector
     private HttpProcessor createProcessor() {
 
         synchronized (processors) {
+            // 如果还有processors则使用栈顶的processor
             if (processors.size() > 0) {
                 // if (debug >= 2)
                 // log("createProcessor: Reusing existing processor");
                 return ((HttpProcessor) processors.pop());
             }
+            // processors中没有processor，同时processor的数量还没有到达最大值，则创建一个
             if ((maxProcessors > 0) && (curProcessors < maxProcessors)) {
                 // if (debug >= 2)
                 // log("createProcessor: Creating new processor");
                 return (newProcessor());
             } else {
+                // maxProcessors小于0，表示processor可以有无限多个
                 if (maxProcessors < 0) {
                     // if (debug >= 2)
                     // log("createProcessor: Creating new processor");
                     return (newProcessor());
                 } else {
+                    // 其他情况，processor的数量达到上限
                     // if (debug >= 2)
                     // log("createProcessor: Cannot create new processor");
                     return (null);
